@@ -17,16 +17,15 @@ func (parser *CmdParser) Init() {
 }
 
 // Parse parse a cmd line
-func (parser *CmdParser) Parse(cmdLine string) []string {
+func (parser *CmdParser) Parse(cmdLine string) []Cmd {
 	cmdArg := parser.regexArg.FindAllString(cmdLine, -1)
-	parseSep(cmdArg)
-	return cmdArg
+	cmds := parseSep(cmdArg)
+	return cmds
 }
 
-func parseSep(execArgs []string) {
+func parseSep(execArgs []string) []Cmd {
 	cmds := []Cmd{}
 	var cmd Cmd
-	cmd.execArg = []string{}
 	cmds = append(cmds, cmd)
 	for _, arg := range execArgs {
 		startCmd := 0
@@ -41,4 +40,5 @@ func parseSep(execArgs []string) {
 		cmds[len(cmds)-1].execArg = append(cmds[len(cmds)-1].execArg, arg[startCmd:len(arg)])
 		cmds[len(cmds)-1].separator = 0
 	}
+	return cmds
 }
