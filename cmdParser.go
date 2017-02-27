@@ -27,7 +27,6 @@ func parseSep(execArgs []string) {
 	cmds := []Cmd{}
 	var cmd Cmd
 	cmd.execArg = []string{}
-	cmd.separator = 't'
 	cmds = append(cmds, cmd)
 	for _, arg := range execArgs {
 		startCmd := 0
